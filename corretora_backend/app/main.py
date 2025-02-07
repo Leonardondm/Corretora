@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from app.database import engine, Base
-from app.routes import auth, client, category, job, report, notification
+from app.routes import auth, client, category, job, report, notification, backup_routes
 import threading
 import time
 from app.services.notification_service import check_pending_payments
@@ -29,6 +29,9 @@ app.include_router(report.router)
 
 # Inclui as rotas de notificações
 app.include_router(notification.router)
+
+app.include_router(backup_routes.router)
+
 
 # Função para agendar a verificação de pagamentos
 def schedule_payment_checks():
